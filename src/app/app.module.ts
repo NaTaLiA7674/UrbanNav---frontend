@@ -8,6 +8,10 @@ import { PiePaginaComponent } from './publico/pagina-maestra/pie-pagina/pie-pagi
 import { MenuLateralComponent } from './publico/pagina-maestra/menu-lateral/menu-lateral.component';
 import { RutaNoEncontradaComponent } from './publico/errores/ruta-no-encontrada/ruta-no-encontrada.component';
 import { ErrorDeServidorComponent } from './publico/errores/error-de-servidor/error-de-servidor.component';
+import { InicioComponent } from './publico/inicio/inicio.component';
+import { MisionComponent } from './publico/mision/mision.component';
+import { VisionComponent } from './publico/vision/vision.component';
+import { PqrsComponent } from './publico/pqrs/pqrs.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { ErrorDeServidorComponent } from './publico/errores/error-de-servidor/er
     PiePaginaComponent,
     MenuLateralComponent,
     RutaNoEncontradaComponent,
-    ErrorDeServidorComponent
+    ErrorDeServidorComponent,
+    InicioComponent,
+    MisionComponent,
+    VisionComponent,
+    PqrsComponent
   ],
   imports: [
     BrowserModule,

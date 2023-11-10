@@ -1,0 +1,67 @@
+section {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.25em;
+    font-weight: 500;
+    text-align: center;
+}
+
+article {
+    margin: 0em 1.875em 3em;
+    background: white;
+    box-shadow: 15px 15px 30px #3c5d69;
+    padding: 0.938em;
+    border-radius: 0.625em;
+}
+
+section img {
+    width: 100%;
+}
+
+.color-1 img {
+    border-bottom: 0.625em solid #0D0CB5;
+}
+
+.color-2 img {
+    border-bottom: 0.625em solid #C82121;
+}
+
+aside {
+    background: #C82121;
+    color: white;
+    font-size: 1.875em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.informativo {
+    background: white;
+    height: 5em;
+    width: 80%;
+    border-radius: 0.625em;
+    margin: 0em 0em 2em;
+}
+
+@media (min-width: 768px) {
+
+   section {
+        width: 70vw;
+        height: 76.3vh;
+        padding: 2em;
+        overflow: auto;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+    }
+
+    aside {
+        width: 30vw;
+        height: auto;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+}
