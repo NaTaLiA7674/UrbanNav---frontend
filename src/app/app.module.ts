@@ -13,6 +13,8 @@ import { MisionComponent } from './publico/mision/mision.component';
 import { VisionComponent } from './publico/vision/vision.component';
 import { PqrsComponent } from './publico/pqrs/pqrs.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,8 +29,8 @@ import { PqrsComponent } from './publico/pqrs/pqrs.component';
     PqrsComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
