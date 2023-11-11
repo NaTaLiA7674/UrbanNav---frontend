@@ -1,8 +1,25 @@
-
-
 section{
     display: flex;
     flex-direction: column;
+}
+
+.frase{
+    background-color: #5C5470;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    font-weight: bold;
+}
+
+.division{
+    padding: 30px;
+}
+
+.imagen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -17,6 +34,7 @@ section{
 
     .division {
         width: 50%;
+        padding: 70px;
       }
   }
 
