@@ -4,22 +4,22 @@
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a routerLink="/inicio">Inicio</a></li>
-        <li><a routerLink="/mision">Misión</a></li>
-        <li><a routerLink="/vision">Visión</a></li>
-        <li><a routerLink="/pqrs">PQRS</a></li>
-        <li><a routerLink="/seguridad/identificar-usuario">Iniciar Sesión</a></li>
-        <li><a routerLink="/seguridad/cambiar-clave">Cambiar clave</a></li>
-        <li><a routerLink="/seguridad/cerrar-sesion">Cerrar Sesión</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/mision">Misión</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/vision">Visión</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/pqrs">PQRS</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/seguridad/identificar-usuario">Iniciar Sesión</a></li>
+        <li><a *ngIf="sesionActiva" routerLink="/seguridad/cambiar-clave">Cambiar Clave </a></li>
+        <li><a *ngIf="sesionActiva" routerLink="/seguridad/cerrar-sesion">Cerrar Sesión</a></li>
       </ul>
     </div>
   </nav>
 
   <ul class="sidenav" id="mobile-demo">
     <li><a routerLink="/inicio">Inicio</a></li>
-        <li><a routerLink="/mision">Misión</a></li>
-        <li><a routerLink="/vision">Visión</a></li>
-        <li><a routerLink="/pqrs">PQRS</a></li>
-        <li><a routerLink="/seguridad/identificar-usuario">Iniciar Sesión</a></li>
-        <li><a routerLink="/seguridad/cambiar-clave">Cambiar clave</a></li>
-        <li><a routerLink="/seguridad/cerrar-sesion">Cerrar Sesión</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/mision">Misión</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/vision">Visión</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/pqrs">PQRS</a></li>
+        <li><a *ngIf="!sesionActiva" routerLink="/seguridad/identificar-usuario">Iniciar Sesión</a></li>
+        <li><a *ngIf="sesionActiva" routerLink="/seguridad/cambiar-clave">Cambiar Clave </a></li>
+        <li><a *ngIf="sesionActiva" routerLink="/seguridad/cerrar-sesion">Cerrar Sesión</a></li>
   </ul>

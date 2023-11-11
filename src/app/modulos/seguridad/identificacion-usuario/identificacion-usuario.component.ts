@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SeguridadService } from 'src/app/servicios/seguridad.service';
 import {MD5} from 'crypto-js';
 import { Router } from '@angular/router';
+import { usuarioModel } from 'src/app/modelos/usuario.model';
 
 @Component({
   selector: 'app-identificacion-usuario',
@@ -39,8 +40,11 @@ export class IdentificacionUsuarioComponent {
       let clave = this.obtenerFormGroup['clave'].value;
       let claveCifrada = MD5(clave).toString();
       this.servicioSeguridad.IdentificarUsuario(usuario, claveCifrada).subscribe({
-        next: (datos: any) => {
+        next: (datos: usuarioModel) => {
           console.log(datos);
+          if(this.servicioSeguridad.AlmacenarDatosUsuarioIdentificado(datos)){
+            this.router.navigate(['/seguridad/2fa']);
+          }
           this.router.navigate(['/seguridad/2fa']);
         },
         error: (err) => {

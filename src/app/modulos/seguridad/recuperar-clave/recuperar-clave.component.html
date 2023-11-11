@@ -1,19 +1,30 @@
 <div id="login-page" class="row">
-    <div class="col s12 z-depth-6 card-panel">
-      <form class="login-form">
-        <div class="row">
+  <h3>¿Olvidaste tu contraseña?</h3>
+  <p>No te preocupes, estamos aquí para ayudarte a recuperar el acceso a tu cuenta. Por favor ingresa tu correo electrónico para proceder a la recuperación de contraseña</p>
+  <div class="col s12 z-depth-6 card-panel">
+    <form class="login-form">
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mail_outline</i>
+          <input class="validate" id="email" type="email">
+          <label for="email" data-error="wrong" data-success="right">correo</label>
         </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <i class="material-icons prefix">mail_outline</i>
-            <input class="validate" id="email" type="email">
-            <label for="email" data-error="wrong" data-success="right">Usuario</label>
-          </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <a href="#" class="btn waves-effect waves-light col s12">Recuperar</a>
         </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <a href="#" class="btn waves-effect waves-light col s12">Recuperar</a>
-          </div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <a
+      class="inline-block my-2 text-sm cursor-pointer text-[#141d2c] align-baseline hover:font-semibold"
+      routerLink="/seguridad/identificar-usuario"
+    >
+      <i>Ya tienes una cuenta? Inicia sesión</i>
+    </a>
+  </div>
+</div>

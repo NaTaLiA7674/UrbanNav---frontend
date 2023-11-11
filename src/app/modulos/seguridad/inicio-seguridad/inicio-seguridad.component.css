@@ -1,0 +1,22 @@
+
+
+section{
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    section {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    .imagen {
+      width: 50%;
+    }
+
+    .division {
+        width: 50%;
+      }
+  }
+

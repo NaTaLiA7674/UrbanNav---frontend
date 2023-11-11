@@ -5,27 +5,38 @@ import { CambioClaveComponent } from './cambio-clave/cambio-clave.component';
 import { RecuperarClaveComponent } from './recuperar-clave/recuperar-clave.component';
 import { CerrarSesionComponent } from './cerrar-sesion/cerrar-sesion.component';
 import { IdentificacionTwofaComponent } from './identificacion-twofa/identificacion-twofa.component';
+import { InicioSeguridadComponent } from './inicio-seguridad/inicio-seguridad.component';
 
 const routes: Routes = [
   {
-    path:"identificar-usuario",
-    component: IdentificacionUsuarioComponent
-  },
-  {
-    path: "cambiar-clave",
-    component: CambioClaveComponent
-  },
-  {
-    path: "recuperar-clave",
-    component: RecuperarClaveComponent
-  },
-  {
-    path: "cerrar-sesion",
-    component: CerrarSesionComponent
-  },
-  {
-    path: "2fa",
-    component: IdentificacionTwofaComponent
+    path: '',
+    component: InicioSeguridadComponent,
+    children: [
+      {
+        path:"identificar-usuario",
+        component: IdentificacionUsuarioComponent
+      },
+      {
+        path: "cambiar-clave",
+        component: CambioClaveComponent
+      },
+      {
+        path: "recuperar-clave",
+        component: RecuperarClaveComponent
+      },
+      {
+        path: "cerrar-sesion",
+        component: CerrarSesionComponent
+      },
+      {
+        path: "2fa",
+        component: IdentificacionTwofaComponent
+      },
+      {
+        path: "**",
+        redirectTo: "identificar-usuario",
+      }
+    ]
   }
 ];
 
