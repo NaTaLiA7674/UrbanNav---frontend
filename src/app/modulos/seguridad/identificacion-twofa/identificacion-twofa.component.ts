@@ -24,6 +24,7 @@ export class IdentificacionTwofaComponent {
     let datos = this.servicioSeguridad.ObtenerDatosUsuarioLs();
     if (datos != null) {
       this.usuarioId = datos._id!;
+      console.log(this.usuarioId);
       this.construirFormulario();
     } else {
       this.router.navigate(['/seguridad/identificar-usuario']);

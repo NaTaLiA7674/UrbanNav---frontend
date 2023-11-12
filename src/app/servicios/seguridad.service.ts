@@ -33,12 +33,16 @@ export class SeguridadService {
    * @param datos datos del usuario
    */
   AlmacenarDatosUsuarioIdentificado(datos: usuarioModel): boolean {
+    console.log("datos a almacenar", datos);
+    localStorage.removeItem("datos-usuario");
     let cadena = JSON.stringify(datos);
     let  datosLS = localStorage.getItem("datos-usuario");
     if(datosLS){
+      console.log("datos ya almacenados");
       return false;
     }else{
       localStorage.setItem("datos-usuario", cadena);
+      console.log("Almacenando datos...");
       return true;
     }
   }
@@ -64,6 +68,7 @@ export class SeguridadService {
    */
   ObtenerDatosUsuarioLs(): usuarioModel | null{
     let datosLS = localStorage.getItem("datos-usuario");
+    console.log(datosLS);
     if(datosLS){
       let datos = JSON.parse(datosLS);
       return datos;
