@@ -133,4 +133,11 @@ export class SeguridadService {
     return this.datosUsuarioValidado.next(datos);
   }
 
+  CambiarClave(idUsuario: string, clave: string): Observable<usuarioModel>{
+    return this.http.post<usuarioModel>(`${this.urlBase}cambiar-clave`, {
+      usuarioId: idUsuario,
+      clave: clave
+    });
+  }
+
 }

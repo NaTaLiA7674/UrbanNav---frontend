@@ -1,1 +1,46 @@
-<p>cambio-clave works!</p>
+<div id="login-page" class="row">
+    <h3>Cambio de clave</h3>
+    <div class="col s12 z-depth-6 card-panel">
+        <form [formGroup]="fGroup" class="login-form">
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input formControlName="claveActual" id="claveActual" type="password">
+                    <label for="claveActual">Clave actual</label>
+                    <div class="show-errors" *ngIf="obtenerFormGroup['claveActual'].errors 
+              && (obtenerFormGroup['claveActual'].dirty || obtenerFormGroup['claveActual'].touched)">
+                        <strong>Este campo es obligatorio</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input formControlName="nuevaClave" id="nuevaClave" type="password">
+                    <label for="nuevaClave">Nueva clave</label>
+                    <div class="show-errors" *ngIf="obtenerFormGroup['nuevaClave'].errors 
+              && (obtenerFormGroup['nuevaClave'].dirty || obtenerFormGroup['nuevaClave'].touched)">
+                        <strong>Este campo es obligatorio</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input formControlName="confirmarClave" id="confirmPassword" type="password">
+                    <label for="confirmPassword">Confirmar clave</label>
+                    <div class="show-errors" *ngIf="obtenerFormGroup['confirmarClave'].errors && obtenerFormGroup['confirmarClave'].hasError('noCoincide')">
+                        <strong>Las claves no coinciden</strong>
+                      </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button (click)="CambiarClave()" class="btn waves-effect waves-light col s12">Confirmar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
