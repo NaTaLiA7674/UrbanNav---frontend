@@ -43,13 +43,16 @@ export class IdentificacionUsuarioComponent {
       this.servicioSeguridad.IdentificarUsuario(usuario, claveCifrada).subscribe({
         next: (datos: usuarioModel) => {
           console.log(datos);
-  
-          if (this.servicioSeguridad.AlmacenarDatosUsuarioIdentificado(datos)) {
-            // Redirigir al usuario a la página 2FA si es necesario
-            this.router.navigate(['/seguridad/2fa']);
+          if(datos._id == undefined || datos._id == null){
+            alert("Credenciales incorrectas o falta la validación del correo electrónico");
           } else {
-            // En este punto, las credenciales son válidas pero la lógica de almacenamiento falló
-            alert("Error al almacenar datos del usuario identificado");
+            if (this.servicioSeguridad.AlmacenarDatosUsuarioIdentificado(datos)) {
+              // Redirigir al usuario a la página 2FA si es necesario
+              this.router.navigate(['/seguridad/2fa']);
+            } else {
+              // En este punto, las credenciales son válidas pero la lógica de almacenamiento falló
+              alert("Error al almacenar datos del usuario identificado");
+            }
           }
         },
         error: (err) => {
