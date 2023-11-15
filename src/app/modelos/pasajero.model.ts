@@ -1,3 +1,5 @@
+import { MedioPagoModel } from "./medio-pago.model";
+
 export class PasajeroModel {
     id?: number;
     primerNombre?: string;
@@ -8,7 +10,7 @@ export class PasajeroModel {
     celular?: string;
     clave?: string;
     rolId?: string;
-    // medioPago?: string;
+    medioPago?: MedioPagoModel;
     contactoEmergenciaNombre?: string;
     contactoEmergenciaTelefono?: string;
 }

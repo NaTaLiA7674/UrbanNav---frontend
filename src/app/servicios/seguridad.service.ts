@@ -7,6 +7,9 @@ import { UsuarioValidadoModel } from '../modelos/usuario.validado.model';
 import { BehaviorSubject } from 'rxjs';
 import { PasajeroModel } from '../modelos/pasajero.model';
 import { ConductorModel } from '../modelos/conductor.model';
+import { MedioPagoModel } from '../modelos/medio-pago.model';
+import { VehiculoModel } from '../modelos/vehiculo.model';
+import { LicenciaModel } from '../modelos/licencia.model';
 
 @Injectable({
   providedIn: 'root'
@@ -94,6 +97,14 @@ export class SeguridadService {
   }
 
   /**
+   * 
+   * @returns Medios de pago guardados en el backend de logica de negocios
+   */
+  ObtenerOpcionesMedioPago(): Observable<MedioPagoModel> {
+    return this.http.get<MedioPagoModel>(`${this.urlBaseLogica}medio-pago`);
+  }
+
+  /**
    * datos del pasajero como usuario público
    * @param datos 	
    * @returns 
@@ -109,6 +120,24 @@ export class SeguridadService {
    */
   RegistrarConductorPublico(datos: any): Observable<ConductorModel>{
     return this.http.post<ConductorModel>(`${this.urlBaseLogica}conductor`, datos);
+  }
+
+  /**
+   * datos del vehiculo para ingresar cuando un conductor se registre
+   * @param datos 
+   * @returns 
+   */
+  RegistrarVehiculo(datos: any): Observable<VehiculoModel>{
+    return this.http.post<VehiculoModel>(`${this.urlBaseLogica}vehiculo`, datos);
+  }
+
+  /**
+   * datos de la licencia para ingresar cuando un conductor se registre
+   * @param datos 
+   * @returns 
+   */
+  RegistrarLicencia(datos: any): Observable<LicenciaModel>{
+    return this.http.post<LicenciaModel>(`${this.urlBaseLogica}licencia`, datos);
   }
 
   /**

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConductorModel } from 'src/app/modelos/conductor.model';
+import { LicenciaModel } from 'src/app/modelos/licencia.model';
+import { MedioPagoModel } from 'src/app/modelos/medio-pago.model';
 import { PasajeroModel } from 'src/app/modelos/pasajero.model';
-import { usuarioModel } from 'src/app/modelos/usuario.model';
-import { SeguridadService } from 'src/app/servicios/seguridad.service'; 
+import { VehiculoModel } from 'src/app/modelos/vehiculo.model';
+import { SeguridadService } from 'src/app/servicios/seguridad.service';
 
 @Component({
   selector: 'app-registro-publico-usuarios',
@@ -13,6 +15,7 @@ import { SeguridadService } from 'src/app/servicios/seguridad.service';
 export class RegistroPublicoUsuariosComponent {
   fGroup: FormGroup = new FormGroup({});
   seccionActual: string = 'tipoUsuario';
+  opcionesDeMedioDePago: MedioPagoModel[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -22,6 +25,7 @@ export class RegistroPublicoUsuariosComponent {
 
   ngOnInit() {
     this.ConstruirFormulario();
+    this.CargarOpcionesMedioDePago();
   }
 
   /**
@@ -48,6 +52,22 @@ export class RegistroPublicoUsuariosComponent {
         vigencia: ['', Validators.required],
         restricciones: ['', Validators.required],
       }),
+    });
+  }
+
+  /**
+   * Carga las opciones de medio de pago
+   */
+  CargarOpcionesMedioDePago() {
+    // Llama al servicio de seguridad para obtener las opciones de medio de pago
+    this.servicioSeguridad.ObtenerOpcionesMedioPago().subscribe({
+      next: (opciones: MedioPagoModel | MedioPagoModel[]) => {
+        // Si es un array, asigna directamente, si es un solo objeto, envuélvelo en un array
+        this.opcionesDeMedioDePago = Array.isArray(opciones) ? opciones : [opciones];
+      },
+      error: (err) => {
+        console.error("Error al cargar las opciones de medio de pago:", err);
+      }
     });
   }
 
@@ -121,10 +141,27 @@ export class RegistroPublicoUsuariosComponent {
       // Llamar al servicio de registro de conductor
       this.servicioSeguridad.RegistrarConductorPublico(conductor).subscribe({
         next: (respuesta: ConductorModel) => {
-          alert("Registro correcto, se ha enviado un mensaje para validar su dirección de correo electrónico.")
-        },
-        error: (err) => {
-          alert("Se ha producido un error en el registro.")
+          alert("Registro correcto, se ha enviado un mensaje para validar su dirección de correo electrónico.");
+
+          // Llamar al servicio para guardar la información del vehículo
+          this.servicioSeguridad.RegistrarVehiculo(respuesta.vehiculo).subscribe({
+            next: (respuestaVehiculo: VehiculoModel) => {
+              // Procesar la respuesta o realizar acciones adicionales si es necesario
+            },
+            error: (errorVehiculo) => {
+              console.error("Error al guardar la información del vehículo:", errorVehiculo);
+            }
+          });
+
+          // Llamar al servicio para guardar la información de la licencia
+          this.servicioSeguridad.RegistrarLicencia(respuesta.licencia).subscribe({
+            next: (respuestaLicencia: LicenciaModel) => {
+              // Procesar la respuesta o realizar acciones adicionales si es necesario
+            },
+            error: (errorLicencia) => {
+              console.error("Error al guardar la información de la licencia:", errorLicencia);
+            }
+          });
         }
       });
     }
@@ -133,5 +170,4 @@ export class RegistroPublicoUsuariosComponent {
   get ObtenerFormGroup() {
     return this.fGroup.controls;
   }
-
 }
