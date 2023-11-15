@@ -51,25 +51,33 @@
 
         <!-- Sección de información específica de pasajero -->
         <div *ngIf="fGroup.get('tipoUsuario')?.value === 'pasajero'">
+            <h5>Contacto de Emergencia</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="nombreContactoEmergencia" id="nombreContactoEmergencia" type="text"
+                        class="validate" />
+                    <label for="nombreContactoEmergencia">Nombre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input formControlName="telefonoContactoEmergencia" id="telefonoContactoEmergencia" type="text"
+                        class="validate" />
+                    <label for="telefonoContactoEmergencia">Teléfono</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <label>Medio de pago</label>
+                    <select formControlName="medioPago">
+                        <!-- Verificar si hay opciones de medio de pago antes de iterar -->
+                        <option *ngFor="let opcion of opcionesDeMedioDePago" [value]="opcion.id">{{ opcion.nombre }}</option>
+                        <!-- O proporcionar un mensaje o lógica alternativa si no hay opciones -->
+                        <option *ngIf="opcionesDeMedioDePago.length === 0" disabled>No hay opciones disponibles</option>
+                    </select>
+                </div>
+            </div>
 
-            <div class="input-field col s3">
-                <input formControlName="nombreContactoEmergencia" id="nombreContactoEmergencia" type="text"
-                    class="validate" />
-                <label for="nombreContactoEmergencia">Nombre de contacto de emergencia</label>
-            </div>
-            <div class="input-field col s3">
-                <input formControlName="telefonoContactoEmergencia" id="telefonoContactoEmergencia" type="text"
-                    class="validate" />
-                <label for="telefonoContactoEmergencia">Teléfono de contacto de emergencia</label>
-            </div>
-            <div class="col s12">
-                <label>Medio de pago</label>
-                <select formControlName="medioPago">
-                    <!-- Aquí puedes iterar sobre las opciones de medio de pago desde tu modelo -->
-                    <option *ngFor="let opcion of opcionesDeMedioDePago" [value]="opcion.id">{{ opcion.nombre }}
-                    </option>
-                </select>
-            </div>
 
             <div class="row">
                 <div class="col s12">

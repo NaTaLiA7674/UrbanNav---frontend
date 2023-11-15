@@ -140,6 +140,12 @@ export class SeguridadService {
     return this.http.post<LicenciaModel>(`${this.urlBaseLogica}licencia`, datos);
   }
 
+  ValidarHashUsuarioPublico(hash: string): Observable<boolean>{
+    return this.http.post<boolean>(`${this.urlBase}validar-hash-usuario`, {
+      codigoHash: hash
+    });
+  }
+
   /**
    * Guarda en localsorage la información del usuario validado
    * @param datos datos del usuario validado
