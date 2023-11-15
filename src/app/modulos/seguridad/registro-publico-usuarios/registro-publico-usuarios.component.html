@@ -1,0 +1,127 @@
+<div class="row">
+    <form [formGroup]="fGroup" class="col s12">
+        <!-- Sección de información común -->
+        <div class="row">
+            <div class="input-field col s3">
+                <input formControlName="primerNombre" id="primerNombre" type="text" class="validate" />
+                <label for="primerNombre">Primer Nombre</label>
+            </div>
+            <div class="input-field col s3">
+                <input formControlName="segundoNombre" id="segundoNombre" type="text" class="validate" />
+                <label for="segundoNombre">Segundo Nombre</label>
+            </div>
+            <div class="input-field col s3">
+                <input formControlName="primerApellido" id="primerApellido" type="text" class="validate" />
+                <label for="primerApellido">Primer Apellido</label>
+            </div>
+            <div class="input-field col s3">
+                <input formControlName="segundoApellido" id="segundoApellido" type="text" class="validate" />
+                <label for="segundoApellido">Segundo Apellido</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input formControlName="correo" id="email" type="email" class="validate" />
+                <label for="email">Correo</label>
+            </div>
+            <div class="input-field col s4">
+                <input formControlName="telefono" id="telefono" type="text" class="validate" />
+                <label for="telefono">Teléfono Celular</label>
+            </div>
+        </div>
+
+        <!-- Sección de tipo de usuario -->
+        <div class="row">
+            <div class="col s12">
+                <label>Tipo de usuario</label>
+                <p>
+                    <label>
+                        <input name="tipoUsuario" type="radio" value="pasajero" formControlName="tipoUsuario" />
+                        <span>Pasajero</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="tipoUsuario" type="radio" value="conductor" formControlName="tipoUsuario" />
+                        <span>Conductor</span>
+                    </label>
+                </p>
+            </div>
+        </div>
+
+        <!-- Sección de información específica de pasajero -->
+        <div *ngIf="fGroup.get('tipoUsuario')?.value === 'pasajero'">
+
+            <div class="input-field col s3">
+                <input formControlName="nombreContactoEmergencia" id="nombreContactoEmergencia" type="text"
+                    class="validate" />
+                <label for="nombreContactoEmergencia">Nombre de contacto de emergencia</label>
+            </div>
+            <div class="input-field col s3">
+                <input formControlName="telefonoContactoEmergencia" id="telefonoContactoEmergencia" type="text"
+                    class="validate" />
+                <label for="telefonoContactoEmergencia">Teléfono de contacto de emergencia</label>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light" type="button" (click)="Registrarse('pasajero')">
+                        Registrarse
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de información específica de conductor -->
+        <div *ngIf="fGroup.get('tipoUsuario')?.value === 'conductor'">
+            <div class="row">
+                <h4>Vehículo</h4>
+                <div class="input-field col s3">
+                    <input formControlName="vehiculo.matricula" id="matricula" type="text" class="validate" />
+                    <label for="matricula">Matrícula del vehículo</label>
+                </div>
+                <div class="input-field col s3">
+                    <input formControlName="vehiculo.modelo" id="modelo" type="text" class="validate" />
+                    <label for="modelo">Modelo del vehículo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s3">
+                    <input formControlName="vehiculo.marca" id="marca" type="text" class="validate" />
+                    <label for="marca">Marca del vehículo</label>
+                </div>
+                <div class="input-field col s3">
+                    <input formControlName="vehiculo.color" id="color" type="text" class="validate" />
+                    <label for="color">Modelo del vehículo</label>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Licencia</h4>
+                <div class="input-field col s3">
+                    <input formControlName="licencia.vigencia" id="vigencia" type="text" class="validate" />
+                    <label for="vigencia">Vigencia de la licencia</label>
+                </div>
+                <div class="input-field col s3">
+                    <input formControlName="licencia.restricciones" id="restricciones" type="text" class="validate" />
+                    <label for="restricciones">Restricciones de la licencia</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light" type="button" (click)="Registrarse('conductor')">
+                        Registrarse
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para pasar a la siguiente sección -->
+        <div class="row">
+            <div class="col s12">
+                <button class="btn waves-effect waves-light" type="button" (click)="Siguiente()">Siguiente</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -5,12 +5,15 @@ import { ConfiguracionRutasBackend } from '../config/configuracion.rutas.backend
 import { Observable } from 'rxjs';
 import { UsuarioValidadoModel } from '../modelos/usuario.validado.model';
 import { BehaviorSubject } from 'rxjs';
+import { PasajeroModel } from '../modelos/pasajero.model';
+import { ConductorModel } from '../modelos/conductor.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeguridadService {
   urlBase: string = ConfiguracionRutasBackend.urlSeguridad;
+  urlBaseLogica: string = ConfiguracionRutasBackend.urlLogicaNegocios;
   constructor(private http: HttpClient) { 
     this.validacionDeSesion();
   }
@@ -88,6 +91,24 @@ export class SeguridadService {
       usuarioId: idUsuario,
       codigo2fa: codigo
     });
+  }
+
+  /**
+   * datos del pasajero como usuario público
+   * @param datos 	
+   * @returns 
+   */
+  RegistrarPasajeroPublico(datos: any): Observable<PasajeroModel>{
+    return this.http.post<PasajeroModel>(`${this.urlBaseLogica}cliente`, datos);
+  }
+
+  /**
+   * datos del conductor como usuario público
+   * @param datos 
+   * @returns 
+   */
+  RegistrarConductorPublico(datos: any): Observable<ConductorModel>{
+    return this.http.post<ConductorModel>(`${this.urlBaseLogica}conductor`, datos);
   }
 
   /**
