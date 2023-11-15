@@ -66,7 +66,8 @@
                 <label>Medio de pago</label>
                 <select formControlName="medioPago">
                     <!-- Aquí puedes iterar sobre las opciones de medio de pago desde tu modelo -->
-                    <option *ngFor="let opcion of opcionesDeMedioDePago" [value]="opcion.id">{{ opcion.nombre }}</option>
+                    <option *ngFor="let opcion of opcionesDeMedioDePago" [value]="opcion.id">{{ opcion.nombre }}
+                    </option>
                 </select>
             </div>
 
@@ -82,36 +83,40 @@
 
         <!-- Sección de información específica de conductor -->
         <div *ngIf="fGroup.get('tipoUsuario')?.value === 'conductor'">
-            <div class="row">
-                <h4>Vehículo</h4>
-                <div class="input-field col s3">
-                    <input formControlName="vehiculo.matricula" id="matricula" type="text" class="validate" />
-                    <label for="matricula">Matrícula del vehículo</label>
+            <div formGroupName="vehiculo">
+                <h5>Vehículo</h5>
+                <div class="row">
+                    <div class="col s6">
+                        <label>Matrícula</label>
+                        <input type="text" formControlName="matricula">
+                    </div>
+                    <div class="col s6">
+                        <label>Modelo</label>
+                        <input type="text" formControlName="modelo">
+                    </div>
                 </div>
-                <div class="input-field col s3">
-                    <input formControlName="vehiculo.modelo" id="modelo" type="text" class="validate" />
-                    <label for="modelo">Modelo del vehículo</label>
+                <div class="row">
+                    <div class="col s6">
+                        <label>Marca</label>
+                        <input type="text" formControlName="marca">
+                    </div>
+                    <div class="col s6">
+                        <label>Color</label>
+                        <input type="text" formControlName="color">
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s3">
-                    <input formControlName="vehiculo.marca" id="marca" type="text" class="validate" />
-                    <label for="marca">Marca del vehículo</label>
-                </div>
-                <div class="input-field col s3">
-                    <input formControlName="vehiculo.color" id="color" type="text" class="validate" />
-                    <label for="color">Modelo del vehículo</label>
-                </div>
-            </div>
-            <div class="row">
-                <h4>Licencia</h4>
-                <div class="input-field col s3">
-                    <input formControlName="licencia.vigencia" id="vigencia" type="text" class="validate" />
-                    <label for="vigencia">Vigencia de la licencia</label>
-                </div>
-                <div class="input-field col s3">
-                    <input formControlName="licencia.restricciones" id="restricciones" type="text" class="validate" />
-                    <label for="restricciones">Restricciones de la licencia</label>
+            <div formGroupName="licencia">
+                <h5>Vigencia</h5>
+                <div class="row">
+                    <div class="col s6">
+                        <label>vigencia</label>
+                        <input type="text" formControlName="vigencia">
+                    </div>
+                    <div class="col s6">
+                        <label>restricciones</label>
+                        <input type="text" formControlName="restricciones">
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -124,10 +129,12 @@
             </div>
         </div>
 
+
+
         <!-- Botón para pasar a la siguiente sección -->
-        <div class="row">
+        <div *ngIf="seccionActual === 'tipoUsuario' && !mostrarBotonSiguiente" class="row">
             <div class="col s12">
-                <button class="btn waves-effect waves-light" type="button" (click)="Siguiente()">Siguiente</button>
+                <button class="btn waves-effect waves-light" type="button" (click)="Siguiente()"></button>
             </div>
         </div>
     </form>

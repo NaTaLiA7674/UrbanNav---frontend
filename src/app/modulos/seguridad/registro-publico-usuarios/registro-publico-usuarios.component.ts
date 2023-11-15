@@ -16,6 +16,7 @@ export class RegistroPublicoUsuariosComponent {
   fGroup: FormGroup = new FormGroup({});
   seccionActual: string = 'tipoUsuario';
   opcionesDeMedioDePago: MedioPagoModel[] = [];
+  mostrarBotonSiguiente: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,7 @@ export class RegistroPublicoUsuariosComponent {
    */
   ConstruirFormulario() {
     this.fGroup = this.fb.group({
+      tipoUsuario: ['', [Validators.required]],
       primerNombre: ['', [Validators.required, Validators.minLength(2)]],
       segundoNombre: ['', [Validators.minLength(2)]],
       primerApellido: ['', [Validators.required, Validators.minLength(2)]],
@@ -52,12 +54,13 @@ export class RegistroPublicoUsuariosComponent {
         vigencia: ['', Validators.required],
         restricciones: ['', Validators.required],
       }),
+      medioPago: ['', [Validators.required]]
     });
   }
 
   /**
-   * Carga las opciones de medio de pago
-   */
+  * Carga las opciones de medio de pago
+  */
   CargarOpcionesMedioDePago() {
     // Llama al servicio de seguridad para obtener las opciones de medio de pago
     this.servicioSeguridad.ObtenerOpcionesMedioPago().subscribe({
@@ -71,6 +74,7 @@ export class RegistroPublicoUsuariosComponent {
     });
   }
 
+
   /**
    * Función para pasar a la siguiente sección
    */
@@ -78,11 +82,15 @@ export class RegistroPublicoUsuariosComponent {
     // Validar que el campo 'tipoUsuario' esté presente y tenga un valor
     const tipoUsuarioControl = this.fGroup.get('tipoUsuario');
     if (tipoUsuarioControl && tipoUsuarioControl.value) {
-      // Determinar la siguiente sección
-      if (tipoUsuarioControl.value === 'pasajero') {
-        this.seccionActual = 'pasajero';
-      } else if (tipoUsuarioControl.value === 'conductor') {
-        this.seccionActual = 'conductor';
+      // Determinar la siguiente sección solo si no se ha cambiado automáticamente
+      if (this.seccionActual === 'tipoUsuario') {
+        if (tipoUsuarioControl.value === 'pasajero') {
+          this.seccionActual = 'pasajero';
+        } else if (tipoUsuarioControl.value === 'conductor') {
+          this.seccionActual = 'conductor';
+        }
+        // Ocultar el botón después de hacer clic en "Siguiente"
+        this.mostrarBotonSiguiente = false;
       }
     }
   }
@@ -130,8 +138,6 @@ export class RegistroPublicoUsuariosComponent {
         segundoApellido: campos["segundoApellido"].value,
         correo: campos["correo"].value,
         celular: campos["telefono"].value,
-        vehiculo: campos["vehiculo"].value,
-        licencia: campos["licencia"].value
       };
 
       // Crear instancia del modelo de conductor y asignar datos
@@ -139,31 +145,50 @@ export class RegistroPublicoUsuariosComponent {
       Object.assign(conductor, datos);
 
       // Llamar al servicio de registro de conductor
+      // Después de registrar el conductor
       this.servicioSeguridad.RegistrarConductorPublico(conductor).subscribe({
         next: (respuesta: ConductorModel) => {
-          alert("Registro correcto, se ha enviado un mensaje para validar su dirección de correo electrónico.");
+          // Obtener el ID del conductor registrado
+          const conductorId = respuesta.id;
 
-          // Llamar al servicio para guardar la información del vehículo
-          this.servicioSeguridad.RegistrarVehiculo(respuesta.vehiculo).subscribe({
+          // Registrar el vehículo
+          const vehiculoDatos = {
+            matricula: campos["vehiculo"].value.matricula,
+            modelo: campos["vehiculo"].value.modelo,
+            marca: campos["vehiculo"].value.marca,
+            color: campos["vehiculo"].value.color,
+            conductorId: conductorId,
+          };
+          this.servicioSeguridad.RegistrarVehiculo(vehiculoDatos).subscribe({
             next: (respuestaVehiculo: VehiculoModel) => {
-              // Procesar la respuesta o realizar acciones adicionales si es necesario
+              // Procesar respuesta de vehículo si es necesario
             },
             error: (errorVehiculo) => {
-              console.error("Error al guardar la información del vehículo:", errorVehiculo);
+              console.error("Error al registrar el vehículo:", errorVehiculo);
             }
           });
 
-          // Llamar al servicio para guardar la información de la licencia
-          this.servicioSeguridad.RegistrarLicencia(respuesta.licencia).subscribe({
+          // Registrar la licencia
+          const licenciaDatos = {
+            vigencia: new Date(campos["licencia"].value.vigencia).toISOString(),
+            restricciones: campos["licencia"].value.restricciones,
+            conductorId: conductorId,
+          };
+          this.servicioSeguridad.RegistrarLicencia(licenciaDatos).subscribe({
             next: (respuestaLicencia: LicenciaModel) => {
-              // Procesar la respuesta o realizar acciones adicionales si es necesario
+              // Procesar respuesta de licencia si es necesario
+              alert("Registro exitoso, se ha enviado un mensaje para validar su dirección de correo electrónico");
             },
             error: (errorLicencia) => {
-              console.error("Error al guardar la información de la licencia:", errorLicencia);
+              console.error("Error al registrar la licencia:", errorLicencia);
             }
           });
+        },
+        error: (error) => {
+          console.error("Error al registrar el conductor:", error);
         }
       });
+
     }
   }
 
