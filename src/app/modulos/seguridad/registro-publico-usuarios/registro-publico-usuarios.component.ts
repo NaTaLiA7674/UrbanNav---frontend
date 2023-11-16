@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConductorModel } from 'src/app/modelos/conductor.model';
 import { LicenciaModel } from 'src/app/modelos/licencia.model';
 import { MedioPagoModel } from 'src/app/modelos/medio-pago.model';
-import { PasajeroModel } from 'src/app/modelos/pasajero.model';
+import { RegistroCompletoConductorModel } from 'src/app/modelos/registro.completo.conductor.model';
+import { RegistroCompletoPasajeroModel } from 'src/app/modelos/registro.completo.pasajero.model';
 import { VehiculoModel } from 'src/app/modelos/vehiculo.model';
 import { SeguridadService } from 'src/app/servicios/seguridad.service';
 
@@ -103,89 +104,75 @@ export class RegistroPublicoUsuariosComponent {
     let datos: any;
 
     if (tipoUsuario === 'pasajero') {
-      // Usar modelo de pasajero
+      // Usar modelo de registro completo de pasajero
       datos = {
-        primerNombre: campos["primerNombre"].value,
-        segundoNombre: campos["segundoNombre"].value,
-        primerApellido: campos["primerApellido"].value,
-        segundoApellido: campos["segundoApellido"].value,
-        correo: campos["correo"].value,
-        celular: campos["telefono"].value,
-        nombreContactoEmergencia: campos["nombreContactoEmergencia"].value,
-        telefonoContactoEmergencia: campos["telefonoContactoEmergencia"].value
+        cliente: {
+          primerNombre: campos["primerNombre"].value,
+          segundoNombre: campos["segundoNombre"].value,
+          primerApellido: campos["primerApellido"].value,
+          segundoApellido: campos["segundoApellido"].value,
+          correo: campos["correo"].value,
+          celular: campos["telefono"].value,
+          contactoEmergenciaNombre: campos["nombreContactoEmergencia"].value,
+          contactoEmergenciaTelefono: campos["telefonoContactoEmergencia"].value,
+        },
+        medioPago: {
+          id: campos["medioPago"].value
+        }
       };
 
-      // Crear instancia del modelo de pasajero y asignar datos
-      const pasajero: PasajeroModel = new PasajeroModel();
-      Object.assign(pasajero, datos);
+      console.log("datos a enviar", datos);
 
-      // Llamar al servicio de registro de pasajero
-      this.servicioSeguridad.RegistrarPasajeroPublico(pasajero).subscribe({
-        next: (respuesta: PasajeroModel) => {
+      // Crear instancia del modelo de registro completo de conductor y asignar datos
+      const registroCompletoPasajero: RegistroCompletoPasajeroModel = new RegistroCompletoPasajeroModel();
+      Object.assign(registroCompletoPasajero, datos);
+
+    // Llamar al servicio de registro de usuario
+    this.servicioSeguridad.RegistrarPasajeroPublico(registroCompletoPasajero).subscribe({
+        next: (respuesta: RegistroCompletoPasajeroModel) => {
+            alert("Registro correcto, se ha enviado un mensaje para validar su dirección de correo electrónico.");
+        },
+        error: (err) => {
+            alert("Se ha producido un error en el registro.");
+        }
+    });
+
+    } else if (tipoUsuario === 'conductor') {
+      //usar modelo de registro completo de conductor
+      datos = {
+        conductor: {
+          primerNombre: campos["primerNombre"].value,
+          segundoNombre: campos["segundoNombre"].value,
+          primerApellido: campos["primerApellido"].value,
+          segundoApellido: campos["segundoApellido"].value,
+          correo: campos["correo"].value,
+          celular: campos["telefono"].value,
+        },
+        vehiculo: {
+          matricula: campos["vehiculo"].value["matricula"],
+          modelo: campos["vehiculo"].value["modelo"],
+          marca: campos["vehiculo"].value["marca"],
+          color: campos["vehiculo"].value["color"]
+        },
+        licencia: {
+          vigencia: campos["licencia"].value["vigencia"],
+          restricciones: campos["licencia"].value["restricciones"]
+        },
+      };
+
+      console.log("datos a enviar", datos);
+
+      // Crear instancia del modelo de registro completo de conductor y asignar datos
+      const registroCompletoConductor: RegistroCompletoConductorModel = new RegistroCompletoConductorModel();
+      Object.assign(registroCompletoConductor, datos);
+
+      // Llamar al servicio de registro de conductor
+      this.servicioSeguridad.RegistrarConductorPublico(registroCompletoConductor).subscribe({
+        next: (respuesta: RegistroCompletoConductorModel) => {
           alert("Registro correcto, se ha enviado un mensaje para validar su dirección de correo electrónico.")
         },
         error: (err) => {
           alert("Se ha producido un error en el registro.")
-        }
-      });
-
-    } else if (tipoUsuario === 'conductor') {
-      // Usar modelo de conductor
-      datos = {
-        primerNombre: campos["primerNombre"].value,
-        segundoNombre: campos["segundoNombre"].value,
-        primerApellido: campos["primerApellido"].value,
-        segundoApellido: campos["segundoApellido"].value,
-        correo: campos["correo"].value,
-        celular: campos["telefono"].value,
-      };
-
-      // Crear instancia del modelo de conductor y asignar datos
-      const conductor: ConductorModel = new ConductorModel();
-      Object.assign(conductor, datos);
-
-      // Llamar al servicio de registro de conductor
-      // Después de registrar el conductor
-      this.servicioSeguridad.RegistrarConductorPublico(conductor).subscribe({
-        next: (respuesta: ConductorModel) => {
-          // Obtener el ID del conductor registrado
-          const conductorId = respuesta.id;
-
-          // Registrar el vehículo
-          const vehiculoDatos = {
-            matricula: campos["vehiculo"].value.matricula,
-            modelo: campos["vehiculo"].value.modelo,
-            marca: campos["vehiculo"].value.marca,
-            color: campos["vehiculo"].value.color,
-            conductorId: conductorId,
-          };
-          this.servicioSeguridad.RegistrarVehiculo(vehiculoDatos).subscribe({
-            next: (respuestaVehiculo: VehiculoModel) => {
-              // Procesar respuesta de vehículo si es necesario
-            },
-            error: (errorVehiculo) => {
-              console.error("Error al registrar el vehículo:", errorVehiculo);
-            }
-          });
-
-          // Registrar la licencia
-          const licenciaDatos = {
-            vigencia: new Date(campos["licencia"].value.vigencia).toISOString(),
-            restricciones: campos["licencia"].value.restricciones,
-            conductorId: conductorId,
-          };
-          this.servicioSeguridad.RegistrarLicencia(licenciaDatos).subscribe({
-            next: (respuestaLicencia: LicenciaModel) => {
-              // Procesar respuesta de licencia si es necesario
-              alert("Registro exitoso, se ha enviado un mensaje para validar su dirección de correo electrónico");
-            },
-            error: (errorLicencia) => {
-              console.error("Error al registrar la licencia:", errorLicencia);
-            }
-          });
-        },
-        error: (error) => {
-          console.error("Error al registrar el conductor:", error);
         }
       });
 

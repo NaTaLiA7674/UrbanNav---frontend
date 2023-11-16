@@ -11,6 +11,6 @@ export class ConductorModel {
     celular?: string;
     clave?: string;
     rolId?: string;
-    vehiculoId?: VehiculoModel;
-    licenciaId?: LicenciaModel;
+    vehiculoId?: number;
+    licenciaId?: number;
 }

@@ -1,5 +1,5 @@
 export class LicenciaModel {
     id?: number;
-    vigencia?: string;
+    vigencia?: Date;
     restricciones?: string;
 }

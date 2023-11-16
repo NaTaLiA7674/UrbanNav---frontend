@@ -1,5 +1,6 @@
 <div class="row">
     <form [formGroup]="fGroup" class="col s12">
+        <h4>Registrarse</h4>
         <!-- Sección de información común -->
         <div class="row">
             <div class="input-field col s3">
@@ -68,13 +69,13 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <label>Medio de pago</label>
-                    <select formControlName="medioPago">
-                        <!-- Verificar si hay opciones de medio de pago antes de iterar -->
-                        <option *ngFor="let opcion of opcionesDeMedioDePago" [value]="opcion.id">{{ opcion.nombre }}</option>
-                        <!-- O proporcionar un mensaje o lógica alternativa si no hay opciones -->
-                        <option *ngIf="opcionesDeMedioDePago.length === 0" disabled>No hay opciones disponibles</option>
-                    </select>
+                    <label for="medioPago">Medio de pago</label>
+                    <div class="input-field">
+                        <select formControlName="medioPago" id="medioPago" class="browser-default">
+                            <option value="" disabled selected>Seleccione un medio de pago</option>
+                            <option *ngFor="let opcion of opcionesDeMedioDePago" [value]="opcion.id">{{ opcion.nombre }}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -119,7 +120,7 @@
                 <div class="row">
                     <div class="col s6">
                         <label>vigencia</label>
-                        <input type="text" formControlName="vigencia">
+                        <input type="date" formControlName="vigencia">
                     </div>
                     <div class="col s6">
                         <label>restricciones</label>

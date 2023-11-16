@@ -5,11 +5,14 @@ import { ConfiguracionRutasBackend } from '../config/configuracion.rutas.backend
 import { Observable } from 'rxjs';
 import { UsuarioValidadoModel } from '../modelos/usuario.validado.model';
 import { BehaviorSubject } from 'rxjs';
-import { PasajeroModel } from '../modelos/pasajero.model';
+import { ClienteModel } from '../modelos/cliente.model';
 import { ConductorModel } from '../modelos/conductor.model';
 import { MedioPagoModel } from '../modelos/medio-pago.model';
 import { VehiculoModel } from '../modelos/vehiculo.model';
 import { LicenciaModel } from '../modelos/licencia.model';
+import { RegistroCompletoConductorModel } from '../modelos/registro.completo.conductor.model';
+import { RegistroCompletoPasajeroModel } from '../modelos/registro.completo.pasajero.model';
+import { PermisoModel } from '../modelos/permiso.model';
 
 @Injectable({
   providedIn: 'root'
@@ -109,8 +112,8 @@ export class SeguridadService {
    * @param datos 	
    * @returns 
    */
-  RegistrarPasajeroPublico(datos: any): Observable<PasajeroModel>{
-    return this.http.post<PasajeroModel>(`${this.urlBaseLogica}cliente`, datos);
+  RegistrarPasajeroPublico(datos: any): Observable<RegistroCompletoPasajeroModel>{
+    return this.http.post<RegistroCompletoPasajeroModel>(`${this.urlBaseLogica}cliente`, datos);
   }
 
   /**
@@ -118,26 +121,8 @@ export class SeguridadService {
    * @param datos 
    * @returns 
    */
-  RegistrarConductorPublico(datos: any): Observable<ConductorModel>{
-    return this.http.post<ConductorModel>(`${this.urlBaseLogica}conductor`, datos);
-  }
-
-  /**
-   * datos del vehiculo para ingresar cuando un conductor se registre
-   * @param datos 
-   * @returns 
-   */
-  RegistrarVehiculo(datos: any): Observable<VehiculoModel>{
-    return this.http.post<VehiculoModel>(`${this.urlBaseLogica}vehiculo`, datos);
-  }
-
-  /**
-   * datos de la licencia para ingresar cuando un conductor se registre
-   * @param datos 
-   * @returns 
-   */
-  RegistrarLicencia(datos: any): Observable<LicenciaModel>{
-    return this.http.post<LicenciaModel>(`${this.urlBaseLogica}licencia`, datos);
+  RegistrarConductorPublico(datos: any): Observable<RegistroCompletoConductorModel>{
+    return this.http.post<RegistroCompletoConductorModel>(`${this.urlBaseLogica}conductor`, datos);
   }
 
   ValidarHashUsuarioPublico(hash: string): Observable<boolean>{
@@ -194,6 +179,10 @@ export class SeguridadService {
       usuarioId: idUsuario,
       clave: clave
     });
+  }
+
+  construirMenuLateral(permisos: PermisoModel[]): string {
+    return "";
   }
 
 }
