@@ -45,12 +45,17 @@ export class IdentificacionTwofaComponent {
       this.servicioSeguridad.ValidarCodigo2fa(this.usuarioId, codigo2fa).subscribe({
         next: (datos: UsuarioValidadoModel) => {
           console.log(datos);
-          this.servicioSeguridad.construirMenuLateral(datos.menu);
-          this.servicioSeguridad.AlmacenarDatosUsuarioValidado(datos);
-          this.router.navigate([""]);
+          if (datos.token != null && datos.token != undefined && datos.token != "") {
+            this.servicioSeguridad.construirMenuLateral(datos.menu);
+            this.servicioSeguridad.AlmacenarDatosUsuarioValidado(datos);
+            this.router.navigate([""]);
+          } else {
+            alert("El código ingresado es incorrecto");
+          }
         },
         error: (err) => {
-          console.log(err);
+          console.log("Error inesperado:", err);
+          alert("Error inesperado");
         }
       });
     }
