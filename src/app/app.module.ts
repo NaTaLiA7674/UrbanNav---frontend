@@ -13,8 +13,9 @@ import { MisionComponent } from './publico/mision/mision.component';
 import { VisionComponent } from './publico/vision/vision.component';
 import { PqrsComponent } from './publico/pqrs/pqrs.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UsuarioComponent } from './seguridad/usuario/usuario.component';
+import { AuthInterceptor } from './interceptores/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { UsuarioComponent } from './seguridad/usuario/usuario.component';
     HttpClientModule,
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

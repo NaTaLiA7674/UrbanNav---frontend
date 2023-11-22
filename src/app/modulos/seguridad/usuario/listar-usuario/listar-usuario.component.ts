@@ -20,6 +20,7 @@ export class ListarUsuarioComponent {
         this.listaUsuarios = datos;
       },
       error: (err) => {
+        console.log(err)
         alert("Error leyendo la información")
       }
     })

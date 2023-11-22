@@ -20,10 +20,12 @@ import { ConfiguracionMenuLateral } from '../config/configuracion.menu.lateral';
   providedIn: 'root'
 })
 export class SeguridadService {
+  token = "";
   urlBase: string = ConfiguracionRutasBackend.urlSeguridad;
   urlBaseLogica: string = ConfiguracionRutasBackend.urlLogicaNegocios;
   constructor(private http: HttpClient) {
     this.validacionDeSesion();
+    this.token = this.ObtenerToken();
   }
 
   /**
@@ -213,13 +215,13 @@ export class SeguridadService {
     localStorage.setItem("menu-lateral", menuStr);
   }
 
-  ObtenerToken(): string | null {
+  ObtenerToken(): string {
     let datosLS = localStorage.getItem("datos-sesion");
     if (datosLS) {
-      let datos = JSON.parse(datosLS);
-      return datos.token;
+      let usuario: UsuarioValidadoModel = JSON.parse(datosLS);
+      return usuario.token!;
     } else {
-      return null;
+      return "";
     }
   }
 
@@ -241,17 +243,9 @@ export class SeguridadService {
    * @returns 
    */
   listarUsuarios(): Observable<usuarioModel[]> {
-    // Obtener el token de obtenerToken
-    const token = this.ObtenerToken();
-    console.log(token);
-
-    // Añadir el token a la solicitud HTTP (si lo tienes en el encabezado)
-    const headers = {
-      'Authorization': `Bearer ${token}`,
-    };
 
     // Enviar la solicitud HTTP con los encabezados
-    return this.http.get<usuarioModel[]>(`${this.urlBase}usuario`, { headers });
+    return this.http.get<usuarioModel[]>(`${this.urlBase}usuario`);
   }
 
 }
