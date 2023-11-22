@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { usuarioModel } from '../modelos/usuario.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfiguracionRutasBackend } from '../config/configuracion.rutas.backend';
 import { Observable } from 'rxjs';
 import { UsuarioValidadoModel } from '../modelos/usuario.validado.model';
@@ -213,6 +213,16 @@ export class SeguridadService {
     localStorage.setItem("menu-lateral", menuStr);
   }
 
+  ObtenerToken(): string | null {
+    let datosLS = localStorage.getItem("datos-sesion");
+    if (datosLS) {
+      let datos = JSON.parse(datosLS);
+      return datos.token;
+    } else {
+      return null;
+    }
+  }
+
   /**
    * 
    * @returns lista con items del menu
@@ -224,6 +234,24 @@ export class SeguridadService {
       menu = JSON.parse(menuStr);
     }
     return menu;
+  }
+
+  /**
+   * Lista de usuarios
+   * @returns 
+   */
+  listarUsuarios(): Observable<usuarioModel[]> {
+    // Obtener el token de obtenerToken
+    const token = this.ObtenerToken();
+    console.log(token);
+
+    // Añadir el token a la solicitud HTTP (si lo tienes en el encabezado)
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+    };
+
+    // Enviar la solicitud HTTP con los encabezados
+    return this.http.get<usuarioModel[]>(`${this.urlBase}usuario`, { headers });
   }
 
 }

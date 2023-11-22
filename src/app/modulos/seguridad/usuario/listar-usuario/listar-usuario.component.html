@@ -1,1 +1,37 @@
-<p>listar-usuario works!</p>
+<br />
+<a routerLink="/seguridad/usuario-crear" class="btn">Agregar usuario</a>
+<br /> 
+
+<!-- Tabla de Materialize -->
+<table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Primer Nombre</th>
+        <th>Segundo Nombre</th>
+        <th>Primer Apellido</th>
+        <th>Segundo Apellido</th>
+        <th>Correo</th>
+        <th>Celular</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let u of listaUsuarios">
+        <td>{{u.primerNombre}}</td>
+        <td>{{u.segundoNombre}}</td>
+        <td>{{u.primerApellido}}</td>
+        <td>{{u.segundoApellido}}</td>
+        <td>{{u.correo}}</td>
+        <td>{{u.celular}}</td>
+        <td>{{u.rolId}}</td>
+        <td>
+            <a routerLink="/seguridad/usuario-editar/{{u._id}}" class="btn btn-orange">Editar usuario</a>
+            &nbsp;
+            <a routerLink="/seguridad/usuario-eliminar/{{u._id}}" class="btn btn-red">Eliminar usuario</a>
+        </td>
+      </tr>
+      <!-- Agrega más filas según sea necesario -->
+    </tbody>
+  </table>

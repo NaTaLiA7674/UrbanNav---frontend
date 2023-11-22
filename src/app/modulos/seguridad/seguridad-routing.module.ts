@@ -70,7 +70,7 @@ const routes: Routes = [
         canActivate: [ValidarSesionActivaGuard]
       },
       {
-        path: "usuario-eliminar",
+        path: "usuario-eliminar/:id",
         component: EliminarUsuarioComponent,
         canActivate: [ValidarSesionActivaGuard]
       },

@@ -14,6 +14,7 @@ import { VisionComponent } from './publico/vision/vision.component';
 import { PqrsComponent } from './publico/pqrs/pqrs.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { UsuarioComponent } from './seguridad/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     InicioComponent,
     MisionComponent,
     VisionComponent,
-    PqrsComponent
+    PqrsComponent,
+    UsuarioComponent
   ],
   imports: [
     AppRoutingModule,
