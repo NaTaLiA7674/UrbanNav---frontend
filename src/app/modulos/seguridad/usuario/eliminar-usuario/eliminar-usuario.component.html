@@ -1,1 +1,31 @@
-<p>eliminar-usuario works!</p>
+<fieldset class="center container">
+    <legend>Eliminar un usuario</legend>
+    <div class="row">
+        <div class="row">
+            <div class="col s12">
+                <strong>¿Confirma la eliminación de estos datos?</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                Nombre: {{primerNombre}} {{segundoNombre}} {{primerApellido}} {{segundoApellido}}
+            </div>
+            <div class="col s4">
+                correo: {{correo}}
+            </div>
+            <div class="col s4">
+                rol: {{rolId}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <a routerLink="/seguridad/usuario-listar" class="btn red">Cancelar</a>
+                &nbsp;
+                <button (click)="EliminarUsuario()" class="btn waves-effect waves-light">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</fieldset>

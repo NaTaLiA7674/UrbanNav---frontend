@@ -24,4 +24,8 @@ export class UsuarioService {
   BuscarUsuario(id: number): Observable<usuarioModel>{
     return this.http.get<usuarioModel>(`${this.url_base}usuario/${id}`);
   }
+
+  EliminarUsuario(id: number): Observable<any>{
+    return this.http.delete<any>(`${this.url_base}usuario/${id}`);
+  }
 }
