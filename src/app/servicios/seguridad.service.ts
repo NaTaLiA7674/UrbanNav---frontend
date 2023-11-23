@@ -243,7 +243,6 @@ export class SeguridadService {
    * @returns 
    */
   listarUsuarios(): Observable<usuarioModel[]> {
-
     // Enviar la solicitud HTTP con los encabezados
     return this.http.get<usuarioModel[]>(`${this.urlBase}usuario`);
   }
