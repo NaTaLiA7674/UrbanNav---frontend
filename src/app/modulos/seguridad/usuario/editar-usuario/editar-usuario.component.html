@@ -1,1 +1,79 @@
-<p>editar-usuario works!</p>
+<fieldset class="center container">
+    <legend>Editar un usuario</legend>
+    <div class="row">
+        <form class="col s12" [formGroup]="fGroup">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input type="hidden" formControlName="_id">
+                        <input formControlName="primerNombre" class="validate" id="primerNombre" type="text">
+                        <label for="primerNombre" data-error="wrong" class="active" data-succes="right">Primer
+                            Nombre</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['primerNombre'].errors 
+                        && (obtenerDatos['primerNombre'].dirty || obtenerDatos['primerNombre'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="segundoNombre" class="validate" id="segundoNombre" type="text">
+                        <label for="segundoNombre" data-error="wrong" class="active" data-succes="right">Segundo
+                            Nombre</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['segundoNombre'].errors 
+                        && (obtenerDatos['segundoNombre'].dirty || obtenerDatos['segundoNombre'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="primerApellido" class="validate" id="primerApellido" type="text">
+                        <label for="primerApellido" data-error="wrong" class="active" data-succes="right">Primer
+                            Apellido </label>
+                        <div class="show-errors" *ngIf="obtenerDatos['primerApellido'].errors 
+                        && (obtenerDatos['primerApellido'].dirty || obtenerDatos['primerApellido'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="segundoApellido" class="validate" id="segundoApellido" type="text">
+                        <label for="segundoApellido" data-error="wrong" class="active" data-succes="right">Segundo
+                            Apellido </label>
+                        <div class="show-errors" *ngIf="obtenerDatos['segundoApellido'].errors 
+                        && (obtenerDatos['segundoApellido'].dirty || obtenerDatos['segundoApellido'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="correo" class="validate" id="correo" type="email">
+                        <label for="correo" data-error="wrong" class="active" data-succes="right">Correo</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['correo'].errors 
+                        && (obtenerDatos['correo'].dirty || obtenerDatos['correo'].touched)">
+                            <strong>Este campo es obligatorio y debe tener formato de correo electrónico</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="celular" class="validate" id="celular" type="text">
+                        <label for="celular" data-error="wrong" class="active" data-succes="right">Celular</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['celular'].errors 
+                        && (obtenerDatos['celular'].dirty || obtenerDatos['celular'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <!-- Se debe corregir bien -->
+                    <div class="input-field col s4">
+                        <input formControlName="rolId" class="validate" id="rolId" type="text">
+                        <label for="rolId" data-error="wrong" class="active" data-succes="right">Rol</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['rolId'].errors 
+                        && (obtenerDatos['rolId'].dirty || obtenerDatos['rolId'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a routerLink="/seguridad/usuario-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="EditarRegistro()" class="btn waves-effect waves-light">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

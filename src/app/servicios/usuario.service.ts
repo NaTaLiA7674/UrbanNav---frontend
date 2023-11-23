@@ -16,4 +16,12 @@ export class UsuarioService {
   AgregarUsuario(usuario: usuarioModel): Observable<usuarioModel>{
     return this.http.post(`${this.url_base}usuario`, usuario);
   }
+
+  EditarUsuario(usuario: usuarioModel): Observable<usuarioModel>{
+    return this.http.put(`${this.url_base}usuario/${usuario._id}`, usuario);
+  }
+
+  BuscarUsuario(id: number): Observable<usuarioModel>{
+    return this.http.get<usuarioModel>(`${this.url_base}usuario/${id}`);
+  }
 }
