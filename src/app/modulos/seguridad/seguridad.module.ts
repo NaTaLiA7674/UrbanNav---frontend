@@ -36,7 +36,6 @@ import { ValidarHashUsuarioPublicoComponent } from './validar-hash-usuario-publi
   imports: [
     CommonModule,
     SeguridadRoutingModule,
-    SeguridadRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ]

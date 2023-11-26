@@ -1,1 +1,41 @@
-<p>crear-solicitud-viaje works!</p>
+<fieldset class="center container">
+    <legend>Solicitar un viaje</legend>
+    <div class="row">
+        <form class="col s12" [formGroup]="fGroup">
+            <div class="row">
+                <div class="row">
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="puntoOrigen">Origen</label>
+                            <div class="input-field">
+                                <select formControlName="puntoOrigen" id="puntoOrigen" class="browser-default">
+                                    <option value="" disabled selected>Seleccione punto de orígen</option>
+                                    <option *ngFor="let opcion of opcionesPuntoOrigen" [value]="opcion.id">{{ opcion.nombreParada }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="puntoDestino">Destino</label>
+                            <div class="input-field">
+                                <select formControlName="puntoDestino" id="puntoDestino" class="browser-default">
+                                    <option value="" disabled selected>Seleccione un punto de destino</option>
+                                    <option *ngFor="let opcion of opcionesPuntoDestino" [value]="opcion.id">{{ opcion.nombreParada }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+        
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a routerLink="/parametros/parada-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="CostoRutaMasCorta()" class="btn waves-effect waves-light">Solicitar Viaje</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

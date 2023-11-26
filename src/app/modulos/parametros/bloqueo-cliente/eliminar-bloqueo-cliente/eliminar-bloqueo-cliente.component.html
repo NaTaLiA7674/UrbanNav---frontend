@@ -1,1 +1,31 @@
-<p>eliminar-bloqueo-cliente works!</p>
+<fieldset class="center container">
+    <legend>Eliminar un bloqueo de un cliente</legend>
+    <div class="row">
+        <div class="row">
+            <div class="col s12">
+                <strong>¿Confirma la eliminación de estos datos?</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                Cliente: {{clienteId}} 
+            </div>
+            <div class="col s4">
+                comentario: {{comentario}}
+            </div>
+            <div class="col s4">
+                fecha: {{fecha}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <a routerLink="/parametros/bloqueo-cliente-listar" class="btn red">Cancelar</a>
+                &nbsp;
+                <button (click)="EliminarBloqueoCliente()" class="btn waves-effect waves-light">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</fieldset>

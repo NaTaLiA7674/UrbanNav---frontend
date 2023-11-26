@@ -1,1 +1,49 @@
-<p>crear-parada works!</p>
+<fieldset class="center container">
+    <legend>Agregar una parada</legend>
+    <div class="row">
+        <form class="col s12" [formGroup]="fGroup">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input formControlName="nombreParada" class="validate" id="nombreParada" type="text">
+                        <label for="nombreParada" data-error="wrong" data-succes="right">Nombre de parada</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['nombreParada'].errors 
+                        && (obtenerDatos['nombreParada'].dirty || obtenerDatos['nombreParada'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="informacionAdicional" class="validate" id="informacionAdicional" type="text">
+                        <label for="informacionAdicional" data-error="wrong" data-succes="right">Información adicional</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['informacionAdicional'].errors 
+                        && (obtenerDatos['informacionAdicional'].dirty || obtenerDatos['informacionAdicional'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="clave" class="validate" id="clave" type="text">
+                        <label for="clave" data-error="wrong" data-succes="right">Clave</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['clave'].errors 
+                        && (obtenerDatos['clave'].dirty || obtenerDatos['clave'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="ubicacionId" class="validate" id="ubicacionId" type="text">
+                        <label for="ubicacionId" data-error="wrong" data-succes="right">Ubicación </label>
+                        <div class="show-errors" *ngIf="obtenerDatos['ubicacionId'].errors 
+                        && (obtenerDatos['ubicacionId'].dirty || obtenerDatos['ubicacionId'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a routerLink="/parametros/parada-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="GuardarParada()" class="btn waves-effect waves-light">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

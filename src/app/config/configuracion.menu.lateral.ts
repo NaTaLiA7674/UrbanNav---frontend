@@ -59,6 +59,13 @@ export namespace ConfiguracionMenuLateral {
             ruta: "/parametros/solicitud-viaje-listar",
             icono: "<i class='material-icons'>cloud</i>",
             texto: "Solicitud de viaje"
-        }];
+        },
+        {
+            id: "6524866ab7b4ea4d182c8fc7",
+            ruta: "/parametros/historial-viajes-listar",
+            icono: "<i class='material-icons'>cloud</i>",
+            texto: "Historial de viajes"
+        }
+    ];
 
 }

@@ -1,1 +1,41 @@
-<p>crear-bloqueo-cliente works!</p>
+<fieldset class="center container">
+    <legend>Añadir nuevo bloqueo de cliente</legend>
+    <div class="row">
+        <form class="col s12" [formGroup]="fGroup">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input formControlName="clienteId" class="validate" id="clienteId" type="text">
+                        <label for="clienteId" data-error="wrong" data-succes="right">Cliente</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['clienteId'].errors 
+                        && (obtenerDatos['clienteId'].dirty || obtenerDatos['clienteId'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="comentario" class="validate" id="comentario" type="text">
+                        <label for="comentario" data-error="wrong" data-succes="right">Comentario</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['comentario'].errors 
+                        && (obtenerDatos['comentario'].dirty || obtenerDatos['comentario'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input formControlName="fecha" class="validate" id="fecha" type="date">
+                        <label for="fecha" data-error="wrong" data-succes="right">Fecha</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['fecha'].errors 
+                        && (obtenerDatos['fecha'].dirty || obtenerDatos['fecha'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a routerLink="/parametros/bloqueo-cliente-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="GuardarRegistro()" class="btn waves-effect waves-light">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

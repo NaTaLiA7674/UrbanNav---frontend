@@ -12,7 +12,6 @@ import { InicioComponent } from './publico/inicio/inicio.component';
 import { MisionComponent } from './publico/mision/mision.component';
 import { VisionComponent } from './publico/vision/vision.component';
 import { PqrsComponent } from './publico/pqrs/pqrs.component';
-
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UsuarioComponent } from './seguridad/usuario/usuario.component';
 import { AuthInterceptor } from './interceptores/auth.interceptor';
@@ -29,7 +28,7 @@ import { AuthInterceptor } from './interceptores/auth.interceptor';
     MisionComponent,
     VisionComponent,
     PqrsComponent,
-    UsuarioComponent
+    UsuarioComponent,
   ],
   imports: [
     AppRoutingModule,

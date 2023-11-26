@@ -1,1 +1,28 @@
-<p>listar-bloqueo-cliente works!</p>
+<br />
+<a routerLink="/parametros/bloqueo-cliente-crear" class="btn">Agregar bloqueo de Cliente</a>
+<br /> 
+
+<!-- Tabla de Materialize -->
+<table class="responsive-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre de Cliente</th>
+        <th>Comentario</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let bc of listaBloqueoCliente">
+        <td>{{bc.clienteId}}</td>
+        <td>{{bc.comentario}}</td>
+        <td>{{bc.fecha}}</td>
+        <td>
+            <a routerLink="/parametros/bloqueo-cliente-editar/{{bc.id}}" class="btn orange">Editar un bloqueo de un cliente</a>
+            &nbsp;
+            <a routerLink="/parametros/bloqueo-cliente-eliminar/{{bc.id}}" class="btn red">Eliminar bloqueo de un cliente</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>

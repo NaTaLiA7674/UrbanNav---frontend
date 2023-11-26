@@ -8,11 +8,33 @@ import { ListarCalificacionClienteComponent } from './calificacion-cliente/lista
 import { ListarDistanciasComponent } from './distancias/listar-distancias/listar-distancias.component';
 import { ListarParadaComponent } from './parada/listar-parada/listar-parada.component';
 import { ListarSolicitudViajeComponent } from './solicitud-viaje/listar-solicitud-viaje/listar-solicitud-viaje.component';
+import { CrearBloqueoClienteComponent } from './bloqueo-cliente/crear-bloqueo-cliente/crear-bloqueo-cliente.component';
+import { EditarBloqueoClienteComponent } from './bloqueo-cliente/editar-bloqueo-cliente/editar-bloqueo-cliente.component';
+import { EliminarBloqueoClienteComponent } from './bloqueo-cliente/eliminar-bloqueo-cliente/eliminar-bloqueo-cliente.component';
+import { CrearParadaComponent } from './parada/crear-parada/crear-parada.component';
+import { EditarParadaComponent } from './parada/editar-parada/editar-parada.component';
+import { EliminarParadaComponent } from './parada/eliminar-parada/eliminar-parada.component';
+import { HistorialViajesListarComponent } from './historial-viajes/historial-viajes-listar/historial-viajes-listar.component';
+import { CrearSolicitudViajeComponent } from './solicitud-viaje/crear-solicitud-viaje/crear-solicitud-viaje.component';
+import { EditarSolicitudViajeComponent } from './solicitud-viaje/editar-solicitud-viaje/editar-solicitud-viaje.component';
+import { EliminarSolicitudViajeComponent } from './solicitud-viaje/eliminar-solicitud-viaje/eliminar-solicitud-viaje.component';
 
 const routes: Routes = [
   {
     path: "bloqueo-cliente-listar",
     component: ListarBloqueoClienteComponent
+  },
+  {
+    path: "bloqueo-cliente-crear",
+    component: CrearBloqueoClienteComponent
+  },
+  {
+    path: "bloqueo-cliente-editar/:id",
+    component: EditarBloqueoClienteComponent
+  },
+  {
+    path: "bloqueo-cliente-eliminar/:id",
+    component: EliminarBloqueoClienteComponent
   },
   {
     path: "bloqueo-conductor-listar",
@@ -39,8 +61,36 @@ const routes: Routes = [
     component: ListarParadaComponent
   },
   {
+    path: "parada-crear",
+    component: CrearParadaComponent
+  },
+  {
+    path: "parada-editar/:id",
+    component: EditarParadaComponent
+  },
+  {
+    path: "parada-eliminar/:id",
+    component: EliminarParadaComponent
+  },
+  {
     path: "solicitud-viaje-listar",
     component: ListarSolicitudViajeComponent
+  },
+  {
+    path: "solicitud-viaje-crear",
+    component: CrearSolicitudViajeComponent
+  },
+  {
+    path: "solicitud-viaje-editar/:id",
+    component: EditarSolicitudViajeComponent
+  },
+  {
+    path: "solicitud-viaje-eliminar/:id",
+    component: EliminarSolicitudViajeComponent
+  },
+  {
+    path: "historial-viajes-listar",
+    component: HistorialViajesListarComponent
   }
 ];
 

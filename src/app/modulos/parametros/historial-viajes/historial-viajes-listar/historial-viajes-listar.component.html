@@ -1,0 +1,22 @@
+<!-- Tabla de Materialize -->
+<table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Viaje</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Costo</th>
+        <th>Botón Pánico</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let v of listaHistorialViajes">
+        <td>{{v.id}}</td>
+        <td>{{v.puntoOrigenId}}</td>
+        <td>{{v.puntoDestinoId}}</td>
+        <td>{{v.costo}}</td>
+        <td>{{v.botonPanicoId}}</td>
+      </tr>
+    </tbody>
+  </table>
