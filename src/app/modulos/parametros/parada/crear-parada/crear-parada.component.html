@@ -28,10 +28,13 @@
                             <strong>Este campo es obligatorio</strong>
                         </div>
                     </div>
-                    <div class="input-field col s4">
-                        <input formControlName="ubicacionId" class="validate" id="ubicacionId" type="text">
-                        <label for="ubicacionId" data-error="wrong" data-succes="right">Ubicación </label>
-                        <div class="show-errors" *ngIf="obtenerDatos['ubicacionId'].errors 
+                    <div class="col s4">
+                        <label for="ubicacionId"  data-error="wrong" data-succes="right">Ubicación </label>
+                         <select formControlName="ubicacionId" class="browser-default">
+                            <option value="" disabled selected>Selecciona una ubicación</option>
+                            <option *ngFor="let u of listaUbicaciones" [value]="u.id">{{u.nombre}}</option>
+                        </select>
+                       <div class="show-errors" *ngIf="obtenerDatos['ubicacionId'].errors 
                         && (obtenerDatos['ubicacionId'].dirty || obtenerDatos['ubicacionId'].touched)">
                             <strong>Este campo es obligatorio</strong>
                         </div>

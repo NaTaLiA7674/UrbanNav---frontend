@@ -1,9 +1,11 @@
-<br />
-<a routerLink="/parametros/parada-crear" class="btn">Agregar parada</a>
-<br /> 
+<body class="container p-5">
 
-<!-- Tabla de Materialize -->
-<table class="responsive-table">
+  <br />
+  <a routerLink="/parametros/parada-crear" class="btn">Agregar parada</a>
+  <br />
+
+  <!-- Tabla de Materialize -->
+  <table class="responsive-table">
     <thead>
       <tr>
         <th>Nombre</th>
@@ -18,13 +20,15 @@
         <td>{{p.nombreParada}}</td>
         <td>{{p.informacionAdicional}}</td>
         <td>{{p.clave}}</td>
-        <td>{{p.ubicacionId}}</td>
+        <td>{{p.ubicacion!.nombre}}</td>
         <td>
-            <a routerLink="/parametros/parada-editar/{{p.id}}" class="btn orange">Editar parada</a>
-            &nbsp;
-            <a routerLink="/parametros/parada-eliminar/{{p.id}}" class="btn red">Eliminar parada</a>
+          <a routerLink="/parametros/parada-editar/{{p.id}}" class="btn orange">Editar parada</a>
+          &nbsp;
+          <a routerLink="/parametros/parada-eliminar/{{p.id}}" class="btn red">Eliminar parada</a>
         </td>
       </tr>
       <!-- Agrega más filas según sea necesario -->
     </tbody>
   </table>
+
+</body>

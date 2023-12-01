@@ -19,11 +19,16 @@ export class ParadaService {
 
   //Listar paradas utilizando el listarCiudad
   listarParadas(): Observable<ParadaModel[]> {
-    return this.http.get<ParadaModel[]>(`${this.url_base}parada`);
+    return this.http.get<ParadaModel[]>(`${this.url_base}parada?filter={"include":[{"relation":"ubicacion"}]}`);
   }
 
   AgregarParadas(model: ParadaModel): Observable<ParadaModel> {
-    return this.http.post<ParadaModel>(`${this.url_base}parada`, model);
+    return this.http.post<ParadaModel>(`${this.url_base}parada`, {
+      nombreParada: model.nombreParada,
+      informacionAdicional: model.informacionAdicional,
+      clave: model.clave,
+      ubicacionId: model.ubicacionId
+    });
   }
 
   BuscarParadas(id: number): Observable<ParadaModel> {
@@ -31,7 +36,12 @@ export class ParadaService {
   }
   
   EditarParadas(model: ParadaModel): Observable<ParadaModel> {
-    return this.http.put(`${this.url_base}parada/${model.id}`, model);
+    return this.http.put(`${this.url_base}parada/${model.id}`, {
+      nombreParada: model.nombreParada,
+      informacionAdicional: model.informacionAdicional,
+      clave: model.clave,
+      ubicacionId: model.ubicacionId
+    });
   }
   
   EliminarParadas(id: number): Observable<any> {

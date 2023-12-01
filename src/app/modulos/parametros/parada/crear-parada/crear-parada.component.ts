@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfiguracionRutasBackend } from 'src/app/config/configuracion.rutas.backend';
+import { CiudadModel } from 'src/app/modelos/ciudad.model';
 import { ParadaModel } from 'src/app/modelos/parada.model';
 import { ParadaService } from 'src/app/servicios/parada.service';
 
@@ -13,6 +14,7 @@ import { ParadaService } from 'src/app/servicios/parada.service';
 export class CrearParadaComponent {
   fGroup: FormGroup = new FormGroup({});
   url_base: String = ConfiguracionRutasBackend.urlLogicaNegocios;
+  listaUbicaciones: CiudadModel[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -21,6 +23,15 @@ export class CrearParadaComponent {
   ) {}
 
   ngOnInit(): void {
+    this.servicio.listarCiudad().subscribe({
+      next: (datos) => {
+        this.listaUbicaciones = datos;
+      },
+      error: (err) => {
+        console.log(err)
+        alert("Error leyendo la información")
+      }
+    });
     this.construirFormulario();
   }
 
@@ -55,7 +66,7 @@ export class CrearParadaComponent {
     model.nombreParada = this.obtenerDatos["nombreParada"].value;
     model.informacionAdicional = this.obtenerDatos["informacionAdicional"].value;
     model.clave = this.obtenerDatos["clave"].value;
-    model.ubicacionId = this.obtenerDatos["ubicacionId"].value;
+    model.ubicacionId = parseInt(this.obtenerDatos["ubicacionId"].value);
     return model;
   }
 
