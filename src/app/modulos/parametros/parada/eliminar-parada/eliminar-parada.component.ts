@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfiguracionRutasBackend } from 'src/app/config/configuracion.rutas.backend';
+import { CiudadModel } from 'src/app/modelos/ciudad.model';
 import { ParadaModel } from 'src/app/modelos/parada.model';
 import { ParadaService } from 'src/app/servicios/parada.service';
 
@@ -15,7 +16,7 @@ export class EliminarParadaComponent {
   nombreParada: string = "";
   informacionAdicional: string = "";
   clave: string = "";
-  ubicacionId: number = 0;
+  ubicacion: CiudadModel | undefined;
 
   constructor(
     private servicio: ParadaService,
@@ -30,12 +31,12 @@ export class EliminarParadaComponent {
   }
 
   BuscarParada() {
-    this.servicio.BuscarParadas(this.recorId).subscribe({
+    this.servicio.BuscarParadasUbicacion(this.recorId).subscribe({
       next: (datos: ParadaModel) => {
         this.nombreParada = datos.nombreParada!;
         this.informacionAdicional = datos.informacionAdicional!;
         this.clave = datos.clave!;
-        this.ubicacionId = datos.ubicacionId!;
+        this.ubicacion = datos.ubicacion!;
       },
       error: (err) => {
         console.log(err)

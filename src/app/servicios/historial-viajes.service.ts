@@ -13,7 +13,7 @@ export class HistorialViajesService {
   constructor(private http: HttpClient) { }
 
   listarHistorialViajes(cliente: HistorialViajeModel): Observable<HistorialViajeModel[]> {
-    return this.http.get<HistorialViajeModel[]>(`${this.url_base}viaje/${cliente.clienteId}`).pipe(
+    return this.http.get<HistorialViajeModel[]>(`${this.url_base}viaje?filter={"include":[{"relation":"puntoOrigen"}, {"relation": "puntoDestino"}]}&where={"clienteId": ${cliente.clienteId}}`).pipe(
       map(data => Array.isArray(data) ? data : [data])
     );
   }

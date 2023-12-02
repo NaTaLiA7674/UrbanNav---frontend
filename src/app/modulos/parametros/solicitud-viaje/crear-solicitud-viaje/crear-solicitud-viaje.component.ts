@@ -16,12 +16,14 @@ export class CrearSolicitudViajeComponent {
   url_base: String = ConfiguracionRutasBackend.urlLogicaNegocios;
   opcionesPuntoOrigen: ParadaModel[] = [];
   opcionesPuntoDestino: ParadaModel[] = [];
+  costoRutaMasCorta: number = 0;
+  mostrarModal: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private servicio: SolicitudViajeService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.construirFormulario();
@@ -36,10 +38,10 @@ export class CrearSolicitudViajeComponent {
     });
   }
 
-   /**
-  * Carga las opciones de medio de pago
-  */
-   CargarOpcionesPuntoOrigen() {
+  /**
+ * Carga las opciones de medio de pago
+ */
+  CargarOpcionesPuntoOrigen() {
     // Llama al servicio de seguridad para obtener las opciones de medio de pago
     this.servicio.ObtenerOpcionesPuntoOrigen().subscribe({
       next: (opciones: ParadaModel | ParadaModel[]) => {
@@ -68,21 +70,28 @@ export class CrearSolicitudViajeComponent {
     });
   }
 
- CostoRutaMasCorta() {
+  CostoRutaMasCorta() {
     // Llama a la función ObtenerRutaMasCorta directamente
     const solicitudViaje = this.obtenerSolicitudViaje();
     this.servicio.ObtenerRutaMasCorta(solicitudViaje).subscribe({
       next: (costo: number) => {
         // Realiza las acciones necesarias con el costo obtenido
         console.log(`El costo de la ruta más corta es: ${costo}`);
-        // Puedes redirigir a otra página o realizar otras acciones aquí
+        this.costoRutaMasCorta = costo;
       },
       error: (err) => {
         console.error("Error al obtener la ruta más corta:", err);
       }
     });
   }
-    
+
+  abrirModal() {
+    this.mostrarModal = true;
+    this.CostoRutaMasCorta();
+  }
+
+  aceptarSolicitud() {
+  }
 
   obtenerSolicitudViaje(): SolicitudViajeModel {
     let model = new SolicitudViajeModel();

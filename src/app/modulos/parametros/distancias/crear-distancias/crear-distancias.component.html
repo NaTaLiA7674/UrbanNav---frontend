@@ -1,1 +1,47 @@
-<p>crear-distancias works!</p>
+<fieldset class="center container">
+    <legend>Agregar una Distancia</legend>
+    <div class="row">
+        <form class="col s12" [formGroup]="fGroup">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input formControlName="kilometros" class="validate" id="kilometros" type="text">
+                        <label for="kilometros" data-error="wrong" data-succes="right">Kilometros</label>
+                        <div class="show-errors" *ngIf="obtenerDatos['kilometros'].errors 
+                        && (obtenerDatos['kilometros'].dirty || obtenerDatos['kilometros'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <label for="origenId"  data-error="wrong" data-succes="right">Origen </label>
+                         <select formControlName="origenId" class="browser-default">
+                            <option value="" disabled selected>Selecciona un Origen</option>
+                            <option *ngFor="let d of listaDistancias" [value]="d.id">{{d.nombreParada}}</option>
+                        </select>
+                       <div class="show-errors" *ngIf="obtenerDatos['origenId'].errors 
+                        && (obtenerDatos['origenId'].dirty || obtenerDatos['origenId'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <label for="destinoId"  data-error="wrong" data-succes="right">Destino </label>
+                         <select formControlName="destinoId" class="browser-default">
+                            <option value="" disabled selected>Selecciona un Destino</option>
+                            <option *ngFor="let d of listaDistancias" [value]="d.id">{{d.nombreParada}}</option>
+                        </select>
+                       <div class="show-errors" *ngIf="obtenerDatos['destinoId'].errors 
+                        && (obtenerDatos['destinoId'].dirty || obtenerDatos['destinoId'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a routerLink="/parametros/distancias-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="GuardarDistancia()" class="btn waves-effect waves-light">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

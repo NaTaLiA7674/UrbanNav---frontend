@@ -1,1 +1,31 @@
-<p>eliminar-distancias works!</p>
+<fieldset class="center container">
+    <legend>Eliminar una Distancia</legend>
+    <div class="row">
+        <div class="row">
+            <div class="col s12">
+                <strong>¿Confirma la eliminación de estos datos?</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                Kilometros: {{kilometros}}
+            </div>
+            <div class="col s4" *ngIf="origen">
+                Origen: {{origen!.nombreParada}}
+            </div>
+            <div class="col s4" *ngIf="destino">
+                Destino: {{destino!.nombreParada}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <a routerLink="/parametros/distancias-listar" class="btn red">Cancelar</a>
+                &nbsp;
+                <button (click)="EliminarDistancia()" class="btn waves-effect waves-light">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</fieldset>

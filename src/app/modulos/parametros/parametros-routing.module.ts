@@ -18,6 +18,9 @@ import { HistorialViajesListarComponent } from './historial-viajes/historial-via
 import { CrearSolicitudViajeComponent } from './solicitud-viaje/crear-solicitud-viaje/crear-solicitud-viaje.component';
 import { EditarSolicitudViajeComponent } from './solicitud-viaje/editar-solicitud-viaje/editar-solicitud-viaje.component';
 import { EliminarSolicitudViajeComponent } from './solicitud-viaje/eliminar-solicitud-viaje/eliminar-solicitud-viaje.component';
+import { CrearDistanciasComponent } from './distancias/crear-distancias/crear-distancias.component';
+import { EliminarDistanciasComponent } from './distancias/eliminar-distancias/eliminar-distancias.component';
+import { EditarDistanciasComponent } from './distancias/editar-distancias/editar-distancias.component';
 
 const routes: Routes = [
   {
@@ -55,6 +58,18 @@ const routes: Routes = [
   {
     path: "distancias-listar",
     component: ListarDistanciasComponent
+  },
+  {
+    path: "distancias-crear",
+    component: CrearDistanciasComponent
+  },
+  {
+    path: "distancias-editar/:id",
+    component: EditarDistanciasComponent
+  },
+  {
+    path: "distancias-eliminar/:id",
+    component: EliminarDistanciasComponent
   },
   {
     path: "parada-listar",

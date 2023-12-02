@@ -1,1 +1,31 @@
-<p>listar-distancias works!</p>
+<body class="container p-5">
+
+    <br />
+    <a routerLink="/parametros/distancias-crear" class="btn">Agregar Distancia</a>
+    <br />
+  
+    <!-- Tabla de Materialize -->
+    <table class="responsive-table">
+      <thead>
+        <tr>
+          <th>Kilómetros</th>
+          <th>Origen</th>
+          <th>Destino</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let d of listaDistancias">
+          <td>{{d.kilometros}}</td>
+          <td>{{d.origen!.nombreParada}}</td>
+          <td>{{d.destino!.nombreParada}}</td>
+          <td>
+            <a routerLink="/parametros/distancias-editar/{{d.id}}" class="btn orange">Editar Distancia</a>
+            &nbsp;
+            <a routerLink="/parametros/distancias-eliminar/{{d.id}}" class="btn red">Eliminar Distancia</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </body>

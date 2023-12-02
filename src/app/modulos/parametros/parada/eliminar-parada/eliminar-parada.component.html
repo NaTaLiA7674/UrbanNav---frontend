@@ -1,4 +1,4 @@
-<fieldset class="center container">
+<fieldset class="center container mt-3 p-3">
     <legend>Eliminar una parada</legend>
     <div class="row">
         <div class="row">
@@ -13,8 +13,8 @@
             <div class="col s4">
                 Información: {{informacionAdicional}}
             </div>
-            <div class="col s4">
-                Ubicación: {{ubicacionId}}
+            <div class="col s4" *ngIf="ubicacion">
+                Ubicación: {{ubicacion!.nombre}}
             </div>
         </div>
 

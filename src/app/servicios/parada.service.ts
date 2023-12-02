@@ -34,6 +34,10 @@ export class ParadaService {
   BuscarParadas(id: number): Observable<ParadaModel> {
     return this.http.get<ParadaModel>(`${this.url_base}parada/${id}`);
   }
+
+  BuscarParadasUbicacion(id: number): Observable<ParadaModel> {
+    return this.http.get<ParadaModel>(`${this.url_base}parada/${id}?filter={"include":[{"relation":"ubicacion"}]}`);
+  }
   
   EditarParadas(model: ParadaModel): Observable<ParadaModel> {
     return this.http.put(`${this.url_base}parada/${model.id}`, {

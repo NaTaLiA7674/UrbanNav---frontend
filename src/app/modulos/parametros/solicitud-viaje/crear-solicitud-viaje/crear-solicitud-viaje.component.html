@@ -31,11 +31,26 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <a routerLink="/parametros/parada-listar" class="btn red">Cancelar</a>&nbsp;
-                        <button (click)="CostoRutaMasCorta()" class="btn waves-effect waves-light">Solicitar Viaje</button>
+                        <a routerLink="/parametros/solicitud-viaje-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="abrirModal()" class="btn waves-effect waves-light">Solicitar Viaje</button>
                     </div>
                 </div>
             </div>
         </form>
+    </div>
+
+    <!-- Modal -->
+    <div *ngIf="mostrarModal" id="modalAceptarRechazar" class="modal">
+        <div class="modal-content">
+            <h4>Confirmar solicitud de viaje</h4>
+            <p>¿Desea aceptar o rechazar la solicitud de viaje?</p>
+            
+            <!-- Mostrar el costo obtenido -->
+            <p *ngIf="costoRutaMasCorta !== undefined">El costo de la ruta más corta es: {{ costoRutaMasCorta }}</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" (click)="aceptarSolicitud()">Aceptar</a>
+            <a routerLink="/parametros/solicitud-viaje-listar" class="modal-close waves-effect waves-red btn-flat">Rechazar</a>
+        </div>
     </div>
 </fieldset>
