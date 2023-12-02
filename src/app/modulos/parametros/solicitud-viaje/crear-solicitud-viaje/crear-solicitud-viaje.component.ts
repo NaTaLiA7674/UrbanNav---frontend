@@ -5,6 +5,7 @@ import { ConfiguracionRutasBackend } from 'src/app/config/configuracion.rutas.ba
 import { ParadaModel } from 'src/app/modelos/parada.model';
 import { SolicitudViajeModel } from 'src/app/modelos/solicitud.viaje.model';
 import { SolicitudViajeService } from 'src/app/servicios/solicitud-viaje.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-solicitud-viaje',
@@ -17,7 +18,7 @@ export class CrearSolicitudViajeComponent {
   opcionesPuntoOrigen: ParadaModel[] = [];
   opcionesPuntoDestino: ParadaModel[] = [];
   costoRutaMasCorta: number = 0;
-  mostrarModal: boolean = false;
+  modalAbierto: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -78,6 +79,13 @@ export class CrearSolicitudViajeComponent {
         // Realiza las acciones necesarias con el costo obtenido
         console.log(`El costo de la ruta más corta es: ${costo}`);
         this.costoRutaMasCorta = costo;
+        console.log(this.costoRutaMasCorta);
+
+        // Abre el modal solo si no se ha abierto previamente
+        if (!this.modalAbierto) {
+          this.modalAbierto = true;
+          this.mostrarModal();
+        }
       },
       error: (err) => {
         console.error("Error al obtener la ruta más corta:", err);
@@ -86,8 +94,24 @@ export class CrearSolicitudViajeComponent {
   }
 
   abrirModal() {
-    this.mostrarModal = true;
+    if (!this.modalAbierto) {
+      this.CostoRutaMasCorta();
+    }
+  }
+
+  mostrarModal() {
     this.CostoRutaMasCorta();
+    Swal.fire({
+      title: '¿Desea aceptar el costo del viaje?',
+      text: `El costo de la ruta más corta es: ${this.costoRutaMasCorta}`,
+      icon: 'info',
+      confirmButtonText: 'Aceptar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      this.modalAbierto = false;
+
+    });
   }
 
   aceptarSolicitud() {
