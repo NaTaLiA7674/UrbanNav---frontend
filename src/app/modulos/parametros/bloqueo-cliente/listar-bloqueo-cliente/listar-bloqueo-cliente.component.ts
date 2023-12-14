@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BloqueoClienteModel } from 'src/app/modelos/bloqueo.cliente.model';
 import { BloqueoClienteService } from 'src/app/servicios/bloqueo-cliente.service';
+import { ClienteService } from 'src/app/servicios/cliente.service';
 
 @Component({
   selector: 'app-listar-bloqueo-cliente',
@@ -11,7 +12,7 @@ export class ListarBloqueoClienteComponent {
   listaBloqueoCliente: BloqueoClienteModel[] = [];
 
   constructor(
-    private servicio: BloqueoClienteService
+    private servicio: BloqueoClienteService,
   ) { }
 
   ngOnInit() {

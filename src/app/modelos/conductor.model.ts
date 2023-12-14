@@ -1,5 +1,4 @@
-import { LicenciaModel } from "./licencia.model";
-import { VehiculoModel } from "./vehiculo.model";
+
 
 export class ConductorModel {
     id?: number;

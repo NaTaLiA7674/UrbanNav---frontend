@@ -13,11 +13,15 @@ export class BloqueoClienteService {
   constructor(private http: HttpClient) { }
 
   listarBloqueoCliente(): Observable<BloqueoClienteModel[]> {
-    return this.http.get<BloqueoClienteModel[]>(`${this.url_base}bloqueo-cliente`);
+    return this.http.get<BloqueoClienteModel[]>(`${this.url_base}bloqueo-cliente?filter={"include":[{"relation":"cliente"}]}`);
   }
 
   AgregarBloqueoCliente(model: BloqueoClienteModel): Observable<BloqueoClienteModel> {
-    return this.http.post<BloqueoClienteModel>(`${this.url_base}bloqueo-cliente`, model);
+    return this.http.post<BloqueoClienteModel>(`${this.url_base}bloqueo-cliente`, {
+      clienteId: model.clienteId,
+      comentario: model.comentario,
+      fecha: model.fecha
+    });
   }
 
   BuscarBloqueoCliente(id: number): Observable<BloqueoClienteModel> {

@@ -21,6 +21,9 @@ import { EliminarSolicitudViajeComponent } from './solicitud-viaje/eliminar-soli
 import { CrearDistanciasComponent } from './distancias/crear-distancias/crear-distancias.component';
 import { EliminarDistanciasComponent } from './distancias/eliminar-distancias/eliminar-distancias.component';
 import { EditarDistanciasComponent } from './distancias/editar-distancias/editar-distancias.component';
+import { ListarPuntoOrigenComponent } from './establecer-origen/listar-punto-origen/listar-punto-origen.component';
+import { CrearPuntoOrigenComponent } from './establecer-origen/crear-punto-origen/crear-punto-origen.component';
+// import { CrearPuntoOrigenComponent } from './establecer-origen/crear-punto-origen/crear-punto-origen.component';
 
 const routes: Routes = [
   {
@@ -89,7 +92,7 @@ const routes: Routes = [
   },
   {
     path: "solicitud-viaje-listar",
-    component: ListarSolicitudViajeComponent
+    component: CrearSolicitudViajeComponent
   },
   {
     path: "solicitud-viaje-crear",
@@ -106,6 +109,14 @@ const routes: Routes = [
   {
     path: "historial-viajes-listar",
     component: HistorialViajesListarComponent
+  },
+  {
+    path: "establecer-origen-listar",
+    component: ListarPuntoOrigenComponent
+  },
+  {
+    path: "establecer-origen-crear",
+    component: CrearPuntoOrigenComponent
   }
 ];
 

@@ -65,6 +65,12 @@ export namespace ConfiguracionMenuLateral {
             ruta: "/parametros/historial-viajes-listar",
             icono: "<i class='material-icons'>cloud</i>",
             texto: "Historial de viajes"
+        },
+        {
+            id: "656b603ba342ae88c5e21d62",
+            ruta: "/parametros/establecer-origen-listar",
+            icono: "<i class='material-icons'>cloud</i>",
+            texto: "Establecer origen cercano"
         }
     ];
 

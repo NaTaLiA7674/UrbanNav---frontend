@@ -1,0 +1,33 @@
+<fieldset class="center container">
+    <legend>Establecer punto cercano</legend>
+    <div class="row">
+        <form class="col s12" [formGroup]="fGroup">
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input formControlName="conductorId" class="validate" id="conductorId" type="hidden">
+                        <label for="conductorId" data-error="wrong" data-success="right"></label>
+                    </div>
+                    
+                    <div class="col s4">
+                        <label for="origenId"  data-error="wrong" data-succes="right">Ubicación </label>
+                         <select formControlName="origenId" class="browser-default">
+                            <option value="" disabled selected>Selecciona una ubicación</option>
+                            <option *ngFor="let u of listaUbicaciones" [value]="u.id">{{u.nombreParada}}</option>
+                        </select>
+                       <div class="show-errors" *ngIf="obtenerDatos['origenId'].errors 
+                        && (obtenerDatos['origenId'].dirty || obtenerDatos['origenId'].touched)">
+                            <strong>Este campo es obligatorio</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a routerLink="/parametros/establecer-origen-listar" class="btn red">Cancelar</a>&nbsp;
+                        <button (click)="GuardarPunto()" class="btn waves-effect waves-light">Establecer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

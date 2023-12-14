@@ -36,6 +36,9 @@ import { CrearCalificacionConductorComponent } from './calificacion-conductor/cr
 import { EliminarCalificacionConductorComponent } from './calificacion-conductor/eliminar-calificacion-conductor/eliminar-calificacion-conductor.component';
 import { HistorialViajesListarComponent } from './historial-viajes/historial-viajes-listar/historial-viajes-listar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { CrearPuntoOrigenComponent } from './establecer-origen/crear-punto-origen/crear-punto-origen.component';
+import { ListarPuntoOrigenComponent } from './establecer-origen/listar-punto-origen/listar-punto-origen.component';
+import { CrearPuntoOrigenComponent } from './establecer-origen/crear-punto-origen/crear-punto-origen.component';
 
 
 @NgModule({
@@ -73,7 +76,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
        EditarCalificacionConductorComponent,
        CrearCalificacionConductorComponent,
        EliminarCalificacionConductorComponent,
-       HistorialViajesListarComponent
+       HistorialViajesListarComponent,
+       CrearPuntoOrigenComponent,
+       ListarPuntoOrigenComponent
   ],
   imports: [
     CommonModule,

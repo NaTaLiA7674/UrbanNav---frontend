@@ -4,10 +4,13 @@
         <form class="col s12" [formGroup]="fGroup">
             <div class="row">
                 <div class="row">
-                    <div class="input-field col s4">
-                        <input formControlName="clienteId" class="validate" id="clienteId" type="text">
-                        <label for="clienteId" data-error="wrong" data-succes="right">Cliente</label>
-                        <div class="show-errors" *ngIf="obtenerDatos['clienteId'].errors 
+                    <div class="col s4">
+                        <label for="clienteId"  data-error="wrong" data-succes="right">Cliente </label>
+                         <select formControlName="clienteId" class="browser-default">
+                            <option value="" disabled selected>Selecciona un Cliente</option>
+                            <option *ngFor="let u of listaClientes" [value]="u.id">{{u.primerNombre}} {{u.primerApellido}}</option>
+                        </select>
+                       <div class="show-errors" *ngIf="obtenerDatos['clienteId'].errors 
                         && (obtenerDatos['clienteId'].dirty || obtenerDatos['clienteId'].touched)">
                             <strong>Este campo es obligatorio</strong>
                         </div>
